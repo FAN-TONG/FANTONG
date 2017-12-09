@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+	<div class="container">
+
+		<div id="login_header" class="tittle clearfix" style="display:none">
+			<button><</button>
+			<div class="login_text">会员登录</div>
+		</div>
+
+		<div class="login_main" id="login_main" style="display:none">
+			<div class="phone">
+				<input class="phone_number" placeholder="请输入手机号码"></input>
+			</div>
+			<div class="ver clearfix">
+				<input class="ver_number" placeholder="请输入验证码"></input>
+				<button class="send_ver">获取验证码</button>
+			</div>
+			<button class="login_button">会员登录</button>
+		</div>
+
+		<div id="user_header" class="tittle clearfix" >
+			<img src="">
+			<div class="user_text">xx桌 <span style="color:gray;font-size:16px">▼</span></div>
+			<div class="user_check_ordered">已点</div>
+		</div>
+
+		<div class="order_main" id="order_main" style="display:none">
+			<ul class="main_context">
+				<li class="clearfix">
+					<div class="food_name">辣炒土豆丝</div>
+					<div class="food_condition condition_ok">已上菜</div>
+					<div class="food_price">¥20.00</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="order_footer clearfix"id="order_footer"style="display:none">
+			<div class="price_sum">
+				<span>共计¥20.00</span>
+			</div>
+			<button class="account">买单</button>
+		</div>
+
+		<div id="buy_footer" class="footer" style="display:none">
+			<div class="footerleft">
+				<img src="">
+				<span></span>
+			</div>
+			<button></button>
+		</div>
+
+
+		<div id="select_footer" class="footer"style="display:none">
+			<div class="footerleft"></div>
+			<button></button>
+		</div>
+
+
+	</div>
+	<script src="./js/order.js"></script>
+</body>
+</html>
