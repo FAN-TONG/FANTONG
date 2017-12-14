@@ -47,14 +47,16 @@ html {overflow-y: scroll; height:100%;}
 }
 .container .tittle img{
 	float: left;
-	width: 10%;
-	display:block;
-	height: 80px;
-	font-size: 28px;
-	color: #333333;
-	background: white;
-	border:none;
-	cursor:pointer;
+    width: 8%;
+    display: block;
+    height: 60px;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 28px;
+    color: #333333;
+    background: white;
+    border: none;
+    cursor: pointer;
 }
 .container .tittle .login_text{
 	float: left;
@@ -233,7 +235,32 @@ html {overflow-y: scroll; height:100%;}
 	color: white;
 }
 
+.table_selected{
+	background-color:#E94F44;
+	border:none;
+	color:white;
+}
 
+
+.table_select_slide{
+	margin-top: 90px;
+	width: 100%;
+	padding:20px 10px;
+	position: fixed;
+	background-color: white;
+}
+
+.table_select_slide ul li{
+	float: left;
+	display: block;
+	width: 27%;
+	margin: 20px 3%;
+	height: 60px;
+	line-height: 60px;
+	font-size: 24px;
+	text-align: center;
+	border: 1px solid gray;
+}
 
 .footer .footerleft{
 	

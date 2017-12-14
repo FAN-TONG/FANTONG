@@ -53,11 +53,7 @@ var loginmain = {
 		loginmain.entity.getElementsByClassName("login_button")[0].onclick = function(){
 			if(loginmain.entity.getElementsByClassName("ver_number")[0].value==loginmain.message.ver){
 				window.alert("用户" + loginmain.message.tel + "已正式登陆");
-				loginheader.hide();
-				loginmain.hide();
-				userheader.display();
-				ordermain.initialize();
-				ordermain.display();
+				maincontroller.messageinput({value:"initial"});
 			}
 			else{
 				window.alert("Emmm,你的密码好像不对...");
@@ -78,10 +74,20 @@ var loginmain = {
 var userheader = {
 	message:{
 		desknum:"",
-		upordown:"down",
+		upordown:"up",
 	},
 	entity:{},
 	messageinput:function(obj){
+		switch(obj.type){
+			case "slideup":
+				userheader.message.upordown="up";
+				userheader.entity.getElementsByTagName("span")[0].innerHTML=" ▼";
+				break;
+			case "desknum":
+				userheader.message.desknum=obj.value;
+				userheader.entity.getElementsByClassName("user_text")[0].innerHTML = userheader.message.desknum + userheader.entity.getElementsByClassName("user_text")[0].innerHTML;
+				break;
+		}
 	},
 	messageoutput:function(obj){
 
@@ -97,25 +103,21 @@ var userheader = {
 		userheader.entity=document.getElementById("user_header");
 		userheader.entity.getElementsByClassName("user_text")[0].innerHTML=userheader.message.desknum+"桌"+'<span style="color:gray;font-size:16px">▼</span>';
 		userheader.entity.getElementsByTagName("img")[0].onclick=function(){
-			window.alert("检测登陆状态并依据情况允许进入登陆页面");
-			if(1){
-				//先默认不让进
-				userheader.hide();
-				ordermain.hide();
-				loginheader.display();
-				loginmain.display();
-			}
+			maincontroller.messageinput({value:"gotologin"});
 		};
 		userheader.entity.getElementsByClassName("user_text")[0].onclick=function(){
-			if(userheader.message.upordown=="down"){
+			if(userheader.message.upordown=="up"){
 				window.alert("将要显示选桌信息，蛤蛤");
-				userheader.entity.getElementsByTagName("span")[0].innerHTML="▲";
-				userheader.message.upordown="up";
+				tableselectslide.initialize();
+				tableselectslide.display();
+				userheader.entity.getElementsByTagName("span")[0].innerHTML=" ▲";
+				userheader.message.upordown="down";
 			}
 			else{
+				tableselectslide.hide();
 				window.alert("将要收起选桌信息，蛤蛤");
-				userheader.entity.getElementsByTagName("span")[0].innerHTML="▼";
-				userheader.message.upordown="down";	
+				userheader.entity.getElementsByTagName("span")[0].innerHTML=" ▼";
+				userheader.message.upordown="up";	
 			}
 		};
 		userheader.entity.getElementsByClassName("user_check_ordered")[0].onclick=function(){
@@ -213,18 +215,116 @@ var orderfooter = {
 	}
 }
 
+var tableselectslide = {
+	message:{
+		tables:[0,1,2,3],
+		select:0
+	},
+	entity:{},
+	messageinput:function(obj){
+		switch(obj.type){
+			case "slidedown":
+				tableselectslide.entity.style.display="block";
+				break;
+		}
+	},
+	messageoutput:function(obj){
+	},
+	display:function(){
+		tableselectslide.entity.style.display = "block";
+	},
+	hide:function(){
+		tableselectslide.entity.style.display = "none";
+	},
+	initialize:function(){
+		tableselectslide.entity=document.getElementById("table_select_slide");
+		tableselectslide.entity.getElementsByTagName("ul")[0].innerHTML="";
+		window.alert("获取/更新所有桌数据以及选中桌数据中");
+		var i;
+		var ul = tableselectslide.entity.getElementsByTagName("ul")[0];
+		for(i=0;i<tableselectslide.message.tables.length;i++){
+			var li = document.createElement("li");
+			if(tableselectslide.message.tables[i]==tableselectslide.message.select){
+				li.setAttribute("class","table_selected");
+			}
+			li.onclick=function(){
+				tableselectslide.message.select=this.innerHTML.replace("桌","");
+				tableselectslide.hide();
+				tableselectslide.initialize();
+				userheader.messageinput({type:"slideup"});
+			}
+			li.innerHTML=tableselectslide.message.tables[i]+"桌";
+			ul.appendChild(li);
+		}
+	}
+}
+
 // 一个重要的想法，需要一个中间虚拟的组件，用于存储登陆状态数据，对各个按钮的事件进行集中管制
 
+var maincontroller = {
+	message:{},//可以存一下用户用户登录信息
+	entity:{},//虚拟的
+	messageinput:function(obj){
+		//只接受操作信息
+		switch(obj.value){
+			case "initial":
+				window.alert("初始信息获取中,展示个临时的页面");
+				groupinitialize(allset);
+				grouphide(allset);
+				groupdisplay(orderpagedisplay);
+				break;
+			case "gotologin":
+				window.alert("检测登陆状态并依据情况允许进入登陆页面");
+				if(1){
+					grouphide(allset);
+					groupinitialize(loginpagedatacore);
+					groupdisplay(loginpagedisplay);
+				}
+				break;
+		}
+	},
+	messageoutput:function(obj){
+	}
+}
 
+function groupinitialize(entityset){
+	var i;
+	for(i=0;i<entityset.length;i++){
+		entityset[i].initialize();
+	}
+}
 
+function grouphide(entityset){
+	var i;
+	for(i=0;i<entityset.length;i++){
+		entityset[i].hide();
+	}
+}
 
-setTimeout(function(){
-	loginheader.initialize();
-	loginmain.initialize();
-	userheader.initialize();
-	ordermain.initialize();
-	orderfooter.initialize();
-	orderfooter.display();
-	userheader.display();
-	ordermain.display();
-},2000)
+function groupdisplay(entityset){
+	var i;
+	for(i=0;i<entityset.length;i++){
+		entityset[i].display();
+	}
+}
+
+var allset = [loginheader,loginmain,userheader,ordermain,orderfooter,tableselectslide];
+
+var loginpagedatacore = [loginheader,loginmain];
+var loginpagedisplay = [loginheader,loginmain];
+
+var orderpagedatacore = [tableselectslide,userheader,ordermain,orderfooter];
+var orderpagedisplay = [userheader,ordermain,orderfooter];
+
+maincontroller.messageinput({value:"initial"});
+
+ready = window.alert;
+
+function debug(num){
+	if(!num){
+		window.alert = function(){};
+	}
+	else{
+		window.alert = ready;
+	}
+}
