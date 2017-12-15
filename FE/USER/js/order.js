@@ -17,11 +17,7 @@ var loginheader = {
 		loginheader.entity = document.getElementById("login_header");
 		loginheader.entity.getElementsByTagName("button")[0].onclick = function(){
 			window.alert("您还是选择了以咸鱼身份登陆系统!");
-			loginheader.hide();
-			loginmain.hide();
-			userheader.display();
-			ordermain.initialize();
-			ordermain.display();
+			maincontroller.messageinput("menu");
 		};
 	}
 }
@@ -75,6 +71,7 @@ var userheader = {
 	message:{
 		desknum:"",
 		upordown:"up",
+		nextstatus:"已点"
 	},
 	entity:{},
 	messageinput:function(obj){
@@ -121,13 +118,32 @@ var userheader = {
 			}
 		};
 		userheader.entity.getElementsByClassName("user_check_ordered")[0].onclick=function(){
-			window.alert("准备显示点菜信息");			
+			if(userheader.message.nextstatus=="已点"){
+				window.alert("准备显示点菜信息");	
+				userheader.message.nextstatus="点菜";
+				userheader.entity.getElementsByClassName("user_check_ordered")[0].innerHTML="点菜";	
+				maincontroller.messageinput({value:"order"});
+			}
+			else if(userheader.message.nextstatus=="点菜"){
+				window.alert("准备显示菜单");
+				userheader.message.nextstatus="已点";
+				userheader.entity.getElementsByClassName("user_check_ordered")[0].innerHTML="已点";
+				maincontroller.messageinput({value:"menu"});
+			}	
 		};
 	}
 }
 
 var ordermain ={
-	message:[{name:"测试菜",status:"已上菜",price:"20"}],
+	message:[{name:"测试菜",status:"已上菜",price:"20"},
+			 {name:"测试菜",status:"已上菜",price:"20"},
+			 {name:"测试菜",status:"已上菜",price:"20"},
+			 {name:"测试菜",status:"已上菜",price:"20"},
+			 {name:"测试菜",status:"已上菜",price:"20"},
+			 {name:"测试菜",status:"已上菜",price:"20"},
+			 {name:"测试菜",status:"已上菜",price:"20"},
+			 {name:"测试菜",status:"已上菜",price:"20"},
+			 {name:"测试菜",status:"已上菜",price:"20"}],
 	entity:{},
 	messageinput:function(obj){
 	},
@@ -178,7 +194,7 @@ var ordermain ={
 				winHeight = window.innerHeight;
 			else if ((document.body) && (document.body.clientHeight))
 				winHeight = document.body.clientHeight;
-			ordermain.entity.style.height = (winHeight - 160) + "px";
+			ordermain.entity.style.height = (winHeight - 180) + "px";
 			ordermain.entity.style.position="absolute";
 			ordermain.entity.style.top="80px";
 			ordermain.entity.style.width="100%";
@@ -261,6 +277,126 @@ var tableselectslide = {
 
 // 一个重要的想法，需要一个中间虚拟的组件，用于存储登陆状态数据，对各个按钮的事件进行集中管制
 
+var selectmain ={
+	message:{
+		leftcnt:{
+			type:[0,0,0,0,0,0,0,0,0],
+		},
+		rightcnt:{
+			dish:{
+				tj:[
+					{
+						name:"辣炒土豆丝",
+						price:"20.00",
+						count:0,
+						src:""
+					},
+					{
+						name:"辣炒菊花",
+						price:"20.00",
+						count:0,
+						src:""
+					},
+					{
+						name:"辣炒苦瓜",
+						price:"20.00",
+						count:0,
+						src:""
+					},
+					{
+						name:"辣炒藕片",
+						price:"20.00",
+						count:0,
+						src:""
+					},
+					{
+						name:"辣炒蛤蛤",
+						price:"20.00",
+						count:0,
+						src:""
+					}
+				],
+				cs:[],
+				lc:[],
+				yc:[],
+				sc:[],
+				zc:[],
+				mc:[],
+				xc:[],
+				hc:[]
+			}
+		}
+	},
+	entity:{},
+	messageinput:function(obj){
+
+	},
+	messageoutput:function(obj){
+
+	},
+	display:function(){
+		selectmain.entity.style.display = "block";
+	},
+	hide:function(){
+		selectmain.entity.style.display = "none";
+	},
+	initialize:function(){
+		window.alert("做个伸手党，向后台要菜数据中！");
+		selectmain.entity=document.getElementById("select_main");
+		var i;
+		var typelist=document.getElementById("dish_style");
+		for(i=0;i<9;i++){
+			var li = typelist.getElementsByTagName("li")[i];
+			li.getElementsByTagName("i")[0].innerHTML=selectmain.message.leftcnt.type[i];
+			li.onclick=function(){window.alert("即将滑动到相应位置~");}
+			if(selectmain.message.leftcnt.type[i]>0){
+				li.getElementsByTagName("i")[0].style.display="block";
+			}
+		}
+		for(type in selectmain.message.rightcnt.dish){
+			var index;
+			switch(type){
+				case "tj":index=0;break;
+				case "cs":index=1;break;
+				case "lc":index=2;break;
+				case "yc":index=3;break;
+				case "sc":index=4;break;
+				case "zc":index=5;break;
+				case "mc":index=6;break;
+				case "xc":index=7;break;
+				case "hc":index=8;break;
+			}
+			var ul = document.getElementById("dish_list").getElementsByTagName("ul")[index];
+			var arr = selectmain.message.rightcnt.dish[type];
+			for(dishn in arr){
+				var dish = arr[dishn];
+				var elestr = '<li><img src="'
+				            +dish.src 
+				            +'"/><div><span>'
+				            +dish.name  
+				            +'</span><div><div>￥<span>'
+				            +dish.price
+				            +'</span></div><div><i>-</i><span>'
+				            +dish.count
+				            +'</span><i>+</i></div></div></div></li>';
+				ul.innerHTML += elestr;
+			}
+		}
+		var winHeight;
+		if (window.innerHeight)
+			winHeight = window.innerHeight;
+		else if ((document.body) && (document.body.clientHeight))
+			winHeight = document.body.clientHeight;
+		document.getElementById("dish_style").style.height = (winHeight - 180) + "px";
+		document.getElementById("dish_list").style.height = (winHeight - 180) + "px";
+		selectmain.entity.style.height = (winHeight - 180) + "px";
+		selectmain.entity.style.position="absolute";
+		selectmain.entity.style.top="82px";
+		selectmain.entity.style.width="100%";
+		window.alert("我的妈暂时不绑事件了，怂了");
+	}
+}
+
 var maincontroller = {
 	message:{},//可以存一下用户用户登录信息
 	entity:{},//虚拟的
@@ -271,7 +407,7 @@ var maincontroller = {
 				window.alert("初始信息获取中,展示个临时的页面");
 				groupinitialize(allset);
 				grouphide(allset);
-				groupdisplay(orderpagedisplay);
+				groupdisplay(selectpagedisplay);
 				break;
 			case "gotologin":
 				window.alert("检测登陆状态并依据情况允许进入登陆页面");
@@ -280,6 +416,16 @@ var maincontroller = {
 					groupinitialize(loginpagedatacore);
 					groupdisplay(loginpagedisplay);
 				}
+				break;
+			case "menu":
+				window.alert("前往菜单");
+				grouphide(allset);
+				groupdisplay(selectpagedisplay);
+				break;
+			case "order":
+				window.alert("前往订单");
+				grouphide(allset);
+				groupdisplay(orderpagedisplay);
 				break;
 		}
 	},
@@ -308,13 +454,16 @@ function groupdisplay(entityset){
 	}
 }
 
-var allset = [loginheader,loginmain,userheader,ordermain,orderfooter,tableselectslide];
+var allset = [loginheader,loginmain,userheader,ordermain,orderfooter,tableselectslide,selectmain];
 
 var loginpagedatacore = [loginheader,loginmain];
 var loginpagedisplay = [loginheader,loginmain];
 
 var orderpagedatacore = [tableselectslide,userheader,ordermain,orderfooter];
 var orderpagedisplay = [userheader,ordermain,orderfooter];
+
+var selectpagedatacore = [tableselectslide,userheader,selectmain];
+var selectpagedisplay = [userheader,selectmain];
 
 maincontroller.messageinput({value:"initial"});
 

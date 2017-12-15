@@ -142,6 +142,7 @@ html {overflow-y: scroll; height:100%;}
 
 .order_main{
 	width: 100%;
+	overflow-y: scroll;
 }
 
 .order_main ul div.blank{
@@ -260,6 +261,160 @@ html {overflow-y: scroll; height:100%;}
 	font-size: 24px;
 	text-align: center;
 	border: 1px solid gray;
+}
+
+
+#dish_style{
+	width:25%;
+	float: left;
+	display: block;
+	margin: 0px;
+	padding: 0px;
+	overflow-y:scroll;
+
+}
+#dish_style > li{
+	list-style: none;
+	height:120px;
+	line-height:120px;
+	font-size:22px;
+	font-family: "微软雅黑";
+	text-align:center;
+	border-bottom:1px solid gray;
+	background-color: #f2f2f2;
+	color:#333333;
+	position: relative;
+}
+#dish_style > li > i{
+	display: none;
+    position: absolute;
+    line-height: 40px;
+    right: 0px;
+    font-style: normal;
+    top: 0px;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #E94F44;
+    color: white;
+}
+#dish_style > li.selected{
+	background-color: white;
+}
+#dish_list{
+	width:75%;
+	float:right;
+	overflow:scroll;
+}
+
+.dish_type_title{
+	padding-top: 50px;
+    display: block;
+    padding-bottom: 50px;
+    font-size: 20px;
+    font-weight: 500;
+    height: 120px;
+}
+
+.dish_sub_list > li{
+	height:120px;
+	margin-top:50px;
+	margin-bottom:50px;
+}
+
+.dish_sub_list > li:first-child{
+	margin-top:0px;
+}
+
+.dish_sub_list > li:last-child{
+	margin-bottom:0px;
+}
+
+.dish_type_title i{
+	display: block;
+    width: 12px;
+    height: 12px;
+    float: left;
+    margin-top: 9px;
+    margin-left: 20px;
+    background-color: #E94F44;
+    margin-right: 10px;
+}
+.dish_sub_list img{
+	width: 120px;
+    height: 120px;
+    display: block;
+    float: left;
+    margin-left: 20px;
+    background-color: black;
+}
+.dish_sub_list > li > div{
+	float: left;
+    margin-left: 20px;
+}
+
+.dish_sub_list > li > div > span{
+	font-size: 28px;
+    position: relative;
+    top: 4px;
+}
+
+.dish_sub_list > li > div > div{
+	height: 84px;
+    width: 400px;
+}
+
+.dish_sub_list > li > div > div > div:first-child{
+	float: left;
+    position: relative;
+    top: 26px;
+    font-size: 28px;
+    color: #E94F44;
+}
+
+.dish_sub_list > li > div > div > div:last-child{
+    float: right;
+    position: relative;
+    top: 26px;
+}
+
+
+.dish_sub_list > li > div > div > div > i:first-child{
+	border-radius: 25px;
+    width: 50px;
+    height: 50px;
+    display: block;
+    float: left;
+    border: 1px solid #e6e6e6;
+    line-height: 50px;
+    text-align: center;
+    color: #e6e6e6;
+    font-size: 25px;	
+    font-style:normal;
+}
+
+.dish_sub_list > li > div > div > div > i:last-child{
+	border-radius: 25px;
+    width: 50px;
+    height: 50px;
+    display: block;
+    float: left;
+    line-height: 50px;
+    text-align: center;
+    color: white;
+    font-size: 25px;	
+    font-style:normal;
+    background-color:#E94F44;
+}
+
+.dish_sub_list > li > div > div > div:last-child> span{
+	margin-left: 20px;
+    margin-right: 20px;
+    line-height: 50px;
+    height: 50px;
+    color: #e6e6e6;
+    font-size: 18px;
+    float:left;
 }
 
 .footer .footerleft{
