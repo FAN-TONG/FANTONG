@@ -289,31 +289,36 @@ var selectmain ={
 						name:"辣炒土豆丝",
 						price:"20.00",
 						count:0,
-						src:""
+						src:"",
+						id:""
 					},
 					{
 						name:"辣炒菊花",
 						price:"20.00",
 						count:0,
-						src:""
+						src:"",
+						id:""
 					},
 					{
 						name:"辣炒苦瓜",
 						price:"20.00",
 						count:0,
-						src:""
+						src:"",
+						id:""
 					},
 					{
 						name:"辣炒藕片",
 						price:"20.00",
 						count:0,
-						src:""
+						src:"",
+						id:""
 					},
 					{
 						name:"辣炒蛤蛤",
 						price:"20.00",
 						count:0,
-						src:""
+						src:"",
+						id:""
 					}
 				],
 				cs:[],
@@ -332,7 +337,64 @@ var selectmain ={
 
 	},
 	messageoutput:function(obj){
-
+		switch(obj.type){
+			case "total":
+				var total=0;
+				for(type in selectmain.message.rightcnt.dish){
+					var index;
+					switch(type){
+						case "tj":index=0;break;
+						case "cs":index=1;break;
+						case "lc":index=2;break;
+						case "yc":index=3;break;
+						case "sc":index=4;break;
+						case "zc":index=5;break;
+						case "mc":index=6;break;
+						case "xc":index=7;break;
+						case "hc":index=8;break;
+					}
+					var arr = selectmain.message.rightcnt.dish[type];
+					for(dishn in arr){
+						var dish = arr[dishn];
+						total+=(dish.price*dish.count);
+					}
+				}
+				return total;
+				break;
+			case "list":
+				var list = [];
+				var price;
+				var name;
+				var id;
+				var count;
+				for(type in selectmain.message.rightcnt.dish){
+					var index;
+					switch(type){
+						case "tj":index=0;break;
+						case "cs":index=1;break;
+						case "lc":index=2;break;
+						case "yc":index=3;break;
+						case "sc":index=4;break;
+						case "zc":index=5;break;
+						case "mc":index=6;break;
+						case "xc":index=7;break;
+						case "hc":index=8;break;
+					}
+					var arr = selectmain.message.rightcnt.dish[type];
+					for(dishn in arr){
+						var dish = arr[dishn];
+						name=dish.name;
+						count=dish.count;
+						id=dish.id;
+						price=(dish.price*dish.count);
+						if(price==0){
+							continue;
+						}
+						list.push({name:name,price:price,count:count,id:id});
+					}
+				}
+				return list;
+		}
 	},
 	display:function(){
 		selectmain.entity.style.display = "block";
@@ -382,6 +444,46 @@ var selectmain ={
 				ul.innerHTML += elestr;
 			}
 		}
+		var plus;
+		plus = selectmain.entity.getElementsByTagName("i");
+		for(i in plus){
+			plus[i].onclick = function(){
+				var name = this.parentNode.parentNode.parentNode.childNodes[0].innerHTML;
+				var cntplace = this.parentNode.getElementsByTagName("span")[0];
+				console.log(name);
+				for(type in selectmain.message.rightcnt.dish){
+					var index;
+					switch(type){
+						case "tj":index=0;break;
+						case "cs":index=1;break;
+						case "lc":index=2;break;
+						case "yc":index=3;break;
+						case "sc":index=4;break;
+						case "zc":index=5;break;
+						case "mc":index=6;break;
+						case "xc":index=7;break;
+						case "hc":index=8;break;
+					}
+					var arr = selectmain.message.rightcnt.dish[type];
+					for(dishn in arr){
+						var dish = arr[dishn];
+						if(dish.name==name){
+							console.log(dish);
+							console.log(plus[i].innerHTML);
+							if(this.innerHTML=="+"){
+								cntplace.innerHTML++;
+								dish.count++;
+							}
+							else{
+								cntplace.innerHTML--;
+								dish.count--;
+							}
+						}
+					}	
+				}	
+			}	
+		}
+		var minus
 		var winHeight;
 		if (window.innerHeight)
 			winHeight = window.innerHeight;
@@ -394,6 +496,72 @@ var selectmain ={
 		selectmain.entity.style.top="82px";
 		selectmain.entity.style.width="100%";
 		window.alert("我的妈暂时不绑事件了，怂了");
+	}
+}
+
+var selectfooter = {
+	message:{
+		image:"",
+		upordown:"down"
+	},
+	entity:{},
+	messageinput:function(obj){
+		switch(obj.value){
+			case "total":
+				selectfooter.entity.getElementsByClassName("price_sum")[0].getElementsByTagName("span")[0].innerHTML="共计¥"+obj.value.total;
+				break;
+		}
+	},
+	messageoutput:function(obj){
+	},
+	display:function(){
+		selectfooter.entity.style.display = "block";
+	},
+	hide:function(){
+		selectfooter.entity.style.display = "none";
+	},
+	initialize:function(){
+		window.alert("索要数据中，好吧我觉得应该都是空的，蛤蛤");
+		selectfooter.entity = document.getElementById("select_footer");
+		var ul = selectfooter.entity.getElementsByClassName("order_done_context")[0].getElementsByTagName("ul");
+		ul.innerHTML="";
+		window.alert("不初始化菜单，仅从外部控件接受并增加菜");
+		selectfooter.entity.getElementsByClassName("food_car")[0].onclick = function(){
+			if(selectfooter.message.upordown=="down"){
+				var list = selectmain.messageoutput({type:"list"});
+				var ul = selectfooter.entity.getElementsByClassName("order_done_context")[0].getElementsByTagName("ul")[0];
+				ul.innerHTML="";
+				var i;
+				for(i=0;i<list.length;i++){
+					var li = '<li class="clearfix">'
+							+'<div class="food_name">'
+							+list[i].name
+							+'</div>'
+							+'<div class="add_number">'
+							+'</div>'
+							+'<div class="food_price">'
+							+"￥"
+							+list[i].price
+							+'</div>'
+							+'</li>';
+					ul.innerHTML += li;
+				}
+				selectfooter.entity.getElementsByClassName("order_done")[0].style.display = "block";
+				selectfooter.message.upordown="up";
+			}
+			else{
+				selectfooter.message.upordown="down";
+				selectfooter.entity.getElementsByClassName("order_done")[0].style.display = "none";
+			}			
+		};
+		selectfooter.entity.getElementsByClassName("order_done_tittle")[0].getElementsByTagName("button")[0].onclick=function(){
+			window.alert("正在帮你重置中，蛤蛤");
+		}
+		selectfooter.entity.getElementsByClassName("account")[0].onclick = function(){
+			window.alert("提交订单中...");
+			maincontroller.messageinput({value:"sendorder"});
+			window.alert("提交完订单后需要重置部分数据~");
+		}
 	}
 }
 
@@ -427,6 +595,12 @@ var maincontroller = {
 				grouphide(allset);
 				groupdisplay(orderpagedisplay);
 				break;
+			case "sendorder":
+				var arr=[];
+				arr=selectmain.messageoutput({type:"list"});
+				console.log(arr);
+				window.alert("发送订单中")
+				break;
 		}
 	},
 	messageoutput:function(obj){
@@ -454,7 +628,7 @@ function groupdisplay(entityset){
 	}
 }
 
-var allset = [loginheader,loginmain,userheader,ordermain,orderfooter,tableselectslide,selectmain];
+var allset = [loginheader,loginmain,userheader,ordermain,orderfooter,tableselectslide,selectmain,selectfooter];
 
 var loginpagedatacore = [loginheader,loginmain];
 var loginpagedisplay = [loginheader,loginmain];
@@ -462,8 +636,8 @@ var loginpagedisplay = [loginheader,loginmain];
 var orderpagedatacore = [tableselectslide,userheader,ordermain,orderfooter];
 var orderpagedisplay = [userheader,ordermain,orderfooter];
 
-var selectpagedatacore = [tableselectslide,userheader,selectmain];
-var selectpagedisplay = [userheader,selectmain];
+var selectpagedatacore = [tableselectslide,userheader,selectmain,selectfooter];
+var selectpagedisplay = [userheader,selectmain,selectfooter];
 
 maincontroller.messageinput({value:"initial"});
 
