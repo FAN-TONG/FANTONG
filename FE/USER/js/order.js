@@ -60,9 +60,9 @@ var loginmain = {
 			winHeight = window.innerHeight;
 		else if ((document.body) && (document.body.clientHeight))
 			winHeight = document.body.clientHeight;
-		loginmain.entity.style.height = (winHeight - 80) + "px";
+		loginmain.entity.style.height = (winHeight - 50) + "pt";
 		loginmain.entity.style.position="absolute";
-		loginmain.entity.style.top="80px";
+		loginmain.entity.style.top="50pt";
 		loginmain.entity.style.width="100%";
 	}
 }
@@ -176,7 +176,7 @@ var ordermain ={
 			var foodprice = document.createElement("div");
 			foodname.innerHTML=ordermain.message[dish].name;
 			foodstatus.innerHTML=ordermain.message[dish].status;
-			foodprice.innerHTML=ordermain.message[dish].price+"￥";
+			foodprice.innerHTML=ordermain.message[dish].price+"¥";
 			foodname.setAttribute("class","food_name");
 			if(dishli.status=="已上菜"){
 				foodstatus.setAttribute("class","food_condition condition_ok");
@@ -194,9 +194,9 @@ var ordermain ={
 				winHeight = window.innerHeight;
 			else if ((document.body) && (document.body.clientHeight))
 				winHeight = document.body.clientHeight;
-			ordermain.entity.style.height = (winHeight - 180) + "px";
+			ordermain.entity.style.height = (winHeight - 90) + "pt";
 			ordermain.entity.style.position="absolute";
-			ordermain.entity.style.top="80px";
+			ordermain.entity.style.top="50pt";
 			ordermain.entity.style.width="100%";
 		}
 	}
@@ -224,7 +224,7 @@ var orderfooter = {
 		orderfooter.entity=document.getElementById("order_footer");
 		window.alert("从菜单中获取数据重新计算中");
 		orderfooter.messageinput(ordermain.messageoutput({type:"totalprice"}));
-		orderfooter.entity.getElementsByTagName("span")[0].innerHTML="共计￥" + orderfooter.message.total;
+		orderfooter.entity.getElementsByTagName("span")[0].innerHTML="共计¥" + orderfooter.message.total;
 		orderfooter.entity.getElementsByTagName("button")[0].onclick=function(){
 			window.alert("付款结算中...");
 		}
@@ -436,7 +436,7 @@ var selectmain ={
 				            +dish.src 
 				            +'"/><div><span>'
 				            +dish.name  
-				            +'</span><div><div>￥<span>'
+				            +'</span><div><div>¥<span>'
 				            +dish.price
 				            +'</span></div><div><i>-</i><span>'
 				            +dish.count
@@ -489,11 +489,11 @@ var selectmain ={
 			winHeight = window.innerHeight;
 		else if ((document.body) && (document.body.clientHeight))
 			winHeight = document.body.clientHeight;
-		document.getElementById("dish_style").style.height = (winHeight - 180) + "px";
-		document.getElementById("dish_list").style.height = (winHeight - 180) + "px";
-		selectmain.entity.style.height = (winHeight - 180) + "px";
+		document.getElementById("dish_style").style.height = (winHeight - 90) + "pt";
+		document.getElementById("dish_list").style.height = (winHeight - 90) + "pt";
+		selectmain.entity.style.height = (winHeight - 90) + "pt";
 		selectmain.entity.style.position="absolute";
-		selectmain.entity.style.top="82px";
+		selectmain.entity.style.top="55pt";
 		selectmain.entity.style.width="100%";
 		window.alert("我的妈暂时不绑事件了，怂了");
 	}
@@ -540,7 +540,7 @@ var selectfooter = {
 							+'<div class="add_number">'
 							+'</div>'
 							+'<div class="food_price">'
-							+"￥"
+							+"¥"
 							+list[i].price
 							+'</div>'
 							+'</li>';
