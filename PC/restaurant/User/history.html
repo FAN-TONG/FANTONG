@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<style type="text/css">
+		.dish_sub_list_history{
+			width: 100%;
+			padding-top: 100px;
+		}
+		.dish_sub_list_history > li{
+			height:120px;
+			margin-top:50px;
+			margin-bottom:50px;
+		}
+
+		.dish_sub_list_history > li:first-child{
+			margin-top:0px;
+		}
+
+		.dish_sub_list_history > li:last-child{
+			margin-bottom:0px;
+		}
+
+		.dish_sub_list_history img{
+			width: 120px;
+    		height: 120px;
+    		display: block;
+    		float: left;
+    		margin-left: 20px;
+    		background-color: black;
+		}
+		.dish_sub_list_history > li > div{
+			float: left;
+    		margin-left: 20px;
+		}
+		.dish_sub_list_history > li > div > span{
+			font-size: 28px;
+    		position: relative;
+    		top: 4px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div id="user_header" class="tittle clearfix">
+			<img src="./image/head.png">
+			<div class="user_text">历史点菜</div>
+			<div class="user_check_ordered"></div>
+		</div>
+
+		<div id="history_main">
+			<ul class="dish_sub_list_history">
+			</ul>
+		</div>
+	</div>
+	<script type="text/javascript" src="./js/jquery-1.11.3.js"></script>
+	<script type="text/javascript">
+		$.get("http://www.ouctechnology.cn:9999/API/getMemberdish.ashx?memberId=17866632847",function(data){
+				console.log(data);
+				var dish = eval(data);
+				console.log(dish);
+					for(var i=0; i<dish.length; i++){
+						//console.log(dish[i].name);
+						var histerm = '<li><img src="'
+					            +dish[i].pic 
+					            +'"/><div><span>'
+					            +dish[i].name  
+					            +'</span><span>('
+					            +dish[i].num
+					            +')</span></div></li>'
+					            
+					$(".dish_sub_list_history")[0].innerHTML += histerm;
+				}
+		})
+	</script>
+</body>
+</html>

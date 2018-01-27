@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="css/employee.css">
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="js/employee.js"></script> 
+	<title>菜品列表</title>
+</head>
+<body>
+	<div class="employee_container">
+		<!-- 待做菜列表 -->
+		<ul class="emp_dish_list cook_dish_undone"></ul>
+		<!-- 已上菜列表 -->
+		<ul class="emp_dish_list cook_dish_done"></ul>
+	</div>
+	<script type="text/javascript">
+		cookDishAJAX();
+		cookSocket();
+	</script>
+</body>
+</html>

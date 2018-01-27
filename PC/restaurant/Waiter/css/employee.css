@@ -1,0 +1,164 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td { margin:0; padding:0; }
+body { background:#fff; color:#555; font-size:14px; font-family: Verdana, Arial, Helvetica, sans-serif; }
+td,th,caption { font-size:14px; }
+h1, h2, h3, h4, h5, h6 { font-weight:normal; font-size:100%; }
+address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal;}
+a { color:#555; text-decoration:none; }
+a:hover { text-decoration:underline; }
+img { border:none; }
+ol,ul,li { list-style:none; }
+input, textarea, select, button { font:14px Verdana,Helvetica,Arial,sans-serif; }
+table { border-collapse:collapse; }
+html {overflow-y: scroll;} 
+/* css common */
+.clearfix:after {content: "."; display: block; height:0; clear:both; visibility: hidden;}
+.clearfix { *zoom:1; }
+
+.employee_container{
+	width: 100%;
+	/*height: 1000px;*/
+}
+
+/*职工登录*/
+.emplogin_container{
+	background: url(../image/bg.png) no-repeat;
+	background-size: 100% 100%;	
+}
+
+.emplogin_btn{
+	display: block;
+	text-decoration: none;
+	height: 60pt;
+	width: 83%;
+	margin: 0 auto;
+	font-size: 18pt;
+	font-family: "PingFang-SC-Bold";
+	color: #fff;
+	text-align: center;
+	background: rgba(255,255,255,0);
+	border: 1px solid #fff; 
+	line-height: 60pt;
+	position: absolute;
+	bottom: 30pt;
+}
+
+/*职工选择*/
+.emplogin_header{
+	font-size: 14pt;
+	color: #333;
+	text-align: center;
+	font-family: "PingFang-SC-Regular";
+	width: 100%;
+	height: 50pt;
+	line-height: 50pt;
+}
+
+ul.employee_list li{
+	height: 96pt;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+ul.employee_list li > div {
+	height: 100%;
+	float: left;
+}
+
+.employee_list_left{
+	width: 35%;
+}
+
+.employee_list_left div{
+	height: 60pt;
+	width: 60pt;
+	position: relative;
+	top: 18pt;
+	left: 18pt;
+}
+
+.employee_male{
+	background: url('../image/male.png');
+	background-size: cover;
+}
+
+.employee_female{
+	background: url('../image/female.png');
+	background-size: cover;
+}
+
+.employee_list_right h1{
+	font-size: 15pt;
+	color: #333333;
+	margin: 20pt 0 16pt 0;
+	font-weight: bold;
+	font-family: "PingFang-SC-Bold";
+}
+
+.employee_list_right span{
+	font-size: 11pt;
+	color: #808080;
+	font-family: "PingFang-SC-Regular"
+}
+
+.emplogin_header_shadow{
+	display: block;
+	height: 6px;
+	width: 100%;
+	background-image: linear-gradient( 
+		to bottom, 
+		rgba(229,229,229,1) 0%, 
+		rgba(229,229,229,0) 100%
+	);
+}
+
+/*职工菜品列表*/
+ul.emp_dish_list li{
+	height: 67pt;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+ul.emp_dish_list li h1{
+	margin-left: 18pt;
+	font-size: 15pt;
+	line-height: 67pt;
+	float: left;
+	color: #333;
+}
+
+ul.emp_dish_list li h1+h1{
+	position: absolute;
+	right: 70pt;
+}
+
+ul.emp_dish_list li span{
+	height: 30pt;
+	width: 30pt;
+	background: url(../image/r-green.png);
+	background-size: cover;
+	display: block;
+	float: right;
+	margin: 18pt 18pt 0 0;
+}
+
+ul.cook_dish_done li h1, ul.waiter_dish_given li h1{
+	color: #808080;
+}
+
+ul.cook_dish_done li span{
+	background: url(../image/r-g.png);
+	background-size: cover;
+}
+
+ul.waiter_dish_get li span{
+	background: url(../image/get-dish.png);
+	background-size: cover;
+}
+
+ul.waiter_dish_give li span{
+	background: url(../image/give-dish.png);
+	background-size: cover;
+}
+
+ul.waiter_dish_given li span{
+	background: url(../image/given-dish.png);
+	background-size: cover;
+}

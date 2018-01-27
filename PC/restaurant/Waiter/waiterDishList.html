@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="css/employee.css">
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="js/socket.io.js"></script>
+	<script type="text/javascript" src="js/employee.js"></script> 
+	<title>菜品列表</title>
+</head>
+<body>
+	<div class="employee_container">
+		<!-- 抢菜列表 -->
+		<ul class="emp_dish_list waiter_dish_get"></ul>
+		<!-- 待上菜列表 -->
+		<ul class="emp_dish_list waiter_dish_give"></ul>
+		<!-- 已上菜列表 -->
+		<ul class="emp_dish_list waiter_dish_given"></ul>
+	</div>
+	<script type="text/javascript">
+		waiterDishAJAX();
+		waiterSocket();
+	</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+C:\Users\zqx\Desktop\数据库课程设计\SocketServer\SocketServer\bin\Debug\SocketServer.exe.config
+C:\Users\zqx\Desktop\数据库课程设计\SocketServer\SocketServer\obj\Debug\SocketServer.csprojResolveAssemblyReference.cache
+C:\Users\zqx\Desktop\数据库课程设计\SocketServer\SocketServer\bin\Debug\SocketServer.exe
+C:\Users\zqx\Desktop\数据库课程设计\SocketServer\SocketServer\bin\Debug\SocketServer.pdb
+C:\Users\zqx\Desktop\数据库课程设计\SocketServer\SocketServer\bin\Debug\Fleck.dll
+C:\Users\zqx\Desktop\数据库课程设计\SocketServer\SocketServer\obj\Debug\SocketServer.exe
+C:\Users\zqx\Desktop\数据库课程设计\SocketServer\SocketServer\obj\Debug\SocketServer.pdb
+C:\Users\zqx\Desktop\数据库课程设计\SocketServer\SocketServer\bin\Debug\Newtonsoft.Json.dll
+C:\Users\zqx\Desktop\数据库课程设计\SocketServer\SocketServer\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\zqx\Desktop\数据库课程设计\SocketServer\SocketServer\bin\Debug\Newtonsoft.Json.xml
